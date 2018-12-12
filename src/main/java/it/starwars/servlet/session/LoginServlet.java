@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 
         // get request parameters for username and password
         String username = request.getParameter("username");
-        String password = request.getParameter("pwd");
+        String password = request.getParameter("password");
 
         if (this.username.equals(username) && this.password.equals(password)) {
             //get the old session and invalidate
