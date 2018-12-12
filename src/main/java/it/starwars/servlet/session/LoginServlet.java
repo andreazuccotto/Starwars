@@ -5,6 +5,8 @@
  */
 package it.starwars.servlet.session;
 
+import it.starwars.bean.Utente;
+import it.starwars.service.UtenteService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -22,18 +24,21 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
-
-    private final String username = "admin";
-    private final String password = "password";
+    
+    private static final String USERNAME = "username";
+    private static final String PASSWORD = "password";
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
 
         // get request parameters for username and password
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String username = request.getParameter(USERNAME) == null ? "" : request.getParameter(USERNAME);
+        String password = request.getParameter(PASSWORD) == null ? "" : request.getParameter(PASSWORD);
+        
+        Utente utente = UtenteService.getUtenteById(username);
+        
 
-        if (this.username.equals(username) && this.password.equals(password)) {
+        if (utente != null && password.equals(utente.getPassword())) {
             //get the old session and invalidate
             HttpSession oldSession = request.getSession(false);
             if (oldSession != null) {

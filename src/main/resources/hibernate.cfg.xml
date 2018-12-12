@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN" 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
+        <property name="hibernate.connection.username">starwars</property>
+        <property name="hibernate.connection.password">starwars</property>
+        <property name="hibernate.connection.url">jdbc:derby://localhost:1527/Starwars</property>
+
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+
+        <property name="hibernate.dialect"<org.hibernate.dialect.DerbyTenSevenDialect</property>
+        <mapping class="it.starwars.bean.Utente"></mapping>
+    </session-factory>
+</hibernate-configuration>
