@@ -1,7 +1,14 @@
 package it.starwars.servlet.session;
 
 import java.io.IOException;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,11 +26,12 @@ import it.starwars.util.MyConstants;
 public class EnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final String HOSTNAME = "smtp.gmail.com";
+	private static final String HOSTNAME = "mail.smtp.host";
 	private static final int PORT = 465;
 	private static final String USERNAME = "gmail";
 	private static final String PASSWORD = "";
 	private static final String MAIL_SUBJECT = "Registrazione it.starwars";
+	private static final String MAIL_FROM = "noreply@starwars.it";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -53,11 +61,35 @@ public class EnrollServlet extends HttpServlet {
 
 	private void sendEmail(String email) {
 
-		Mailer mailer = new Mailer(HOSTNAME, PORT, USERNAME, PASSWORD);
+		// Get system properties
+		Properties properties = System.getProperties();
 
-		String message = "";
+		// Setup mail server
+		properties.setProperty("mail.smtp.host", "localhost");
 
-		mailer.send(MyConstants.MAIL_FROM, email, MAIL_SUBJECT, message);
+		// Get the default Session object.
+		Session session = Session.getDefaultInstance(properties);
+
+		try {
+			// Create a default MimeMessage object.
+			MimeMessage message = new MimeMessage(session);
+
+			// Set From: header field of the header.
+			message.setFrom(new InternetAddress(MAIL_FROM));
+
+			// Set To: header field of the header.
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+
+			// Set Subject: header field
+			message.setSubject(MAIL_SUBJECT);
+
+			// Now set the actual message
+			message.setText("This is actual message");
+
+			// Send message
+			Transport.send(message);
+		} catch (MessagingException mex) {
+			mex.printStackTrace();
+		}
 	}
-
 }

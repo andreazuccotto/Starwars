@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,6 +30,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int MAX_INACTIVE_INTERVAL = 300;
 	private static final String LOGIN_PATH = "/login/loginPage.html";
+	private static final String HOMEPAGE_PATH = "/Starwars/main/homepage.jsp";
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -77,11 +77,11 @@ public class LoginServlet extends HttpServlet {
 		// setting session to expiry in 5 mins
 		newSession.setMaxInactiveInterval(MAX_INACTIVE_INTERVAL);
 
-		newSession.setAttribute("user", utente);
+		newSession.setAttribute(MyConstants.USER, utente);
 
-		Cookie message = new Cookie("message", "Welcome");
-		response.addCookie(message);
-		response.sendRedirect("/Starwars/main/index.html");
+		UtenteService.updateDateLastUpdate(utente);
+
+		response.sendRedirect(HOMEPAGE_PATH);
 
 	}
 }

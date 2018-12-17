@@ -12,7 +12,7 @@
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
 
-        <property name="hibernate.dialect"<org.hibernate.dialect.DerbyTenSevenDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.DerbyTenSevenDialect</property>
         <mapping class="it.starwars.bean.Utente"></mapping>
     </session-factory>
 </hibernate-configuration>
