@@ -5,10 +5,9 @@
  */
 package it.starwars.servlet.session;
 
-import it.starwars.bean.Utente;
-import it.starwars.service.UtenteService;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,46 +17,71 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.starwars.bean.Utente;
+import it.starwars.service.UtenteService;
+import it.starwars.util.MyConstants;
+import it.starwars.util.MyUtils;
+
 /**
  *
  * @author pi
  */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
-    
-    private static final String USERNAME = "username";
-    private static final String PASSWORD = "password";
+	private static final long serialVersionUID = 1L;
+	private static final int MAX_INACTIVE_INTERVAL = 300;
+	private static final String LOGIN_PATH = "/login/loginPage.html";
 
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response) throws ServletException, IOException {
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        // get request parameters for username and password
-        String username = request.getParameter(USERNAME) == null ? "" : request.getParameter(USERNAME);
-        String password = request.getParameter(PASSWORD) == null ? "" : request.getParameter(PASSWORD);
-        
-        Utente utente = UtenteService.getUtenteById(username);
-        
+		// get request parameters for username and password
+		String username = MyUtils.getSafeString(request.getParameter(MyConstants.USERNAME));
+		String password = MyUtils.getSafeString(request.getParameter(MyConstants.PASSWORD));
 
-        if (utente != null && password.equals(utente.getPassword())) {
-            //get the old session and invalidate
-            HttpSession oldSession = request.getSession(false);
-            if (oldSession != null) {
-                oldSession.invalidate();
-            }
-            //generate a new session
-            HttpSession newSession = request.getSession(true);
+		Utente utente = UtenteService.getUtenteById(username);
 
-            //setting session to expiry in 5 mins
-            newSession.setMaxInactiveInterval(5*60);
+		if (utente == null) {
+			RequestDispatcher rd = getServletContext().getRequestDispatcher(LOGIN_PATH);
+			PrintWriter out = response.getWriter();
+			out.println("<font color=red>Username non corretta.</font>");
+			rd.include(request, response);
+			return;
+		}
 
-            Cookie message = new Cookie("message", "Welcome");
-            response.addCookie(message);
-            response.sendRedirect("/Starwars/main/index.html");
-        } else {
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login/loginPage.html");
-            PrintWriter out = response.getWriter();
-            out.println("<font color=red>Either username or password is wrong.</font>");
-            rd.include(request, response);
-        }
-    }
-} 
+		if (!password.equals(utente.getPassword())) {
+			RequestDispatcher rd = getServletContext().getRequestDispatcher(LOGIN_PATH);
+			PrintWriter out = response.getWriter();
+			out.println("<font color=red>Password non corretta.</font>");
+			rd.include(request, response);
+			return;
+		}
+
+		if (!utente.getAttivo()) {
+			RequestDispatcher rd = getServletContext().getRequestDispatcher(LOGIN_PATH);
+			PrintWriter out = response.getWriter();
+			out.println("<font color=red>Utente non attivo.</font>");
+			rd.include(request, response);
+			return;
+		}
+
+		// get the old session and invalidate
+		HttpSession oldSession = request.getSession(false);
+		if (oldSession != null) {
+			oldSession.invalidate();
+		}
+		// generate a new session
+		HttpSession newSession = request.getSession(true);
+
+		// setting session to expiry in 5 mins
+		newSession.setMaxInactiveInterval(MAX_INACTIVE_INTERVAL);
+
+		newSession.setAttribute("user", utente);
+
+		Cookie message = new Cookie("message", "Welcome");
+		response.addCookie(message);
+		response.sendRedirect("/Starwars/main/index.html");
+
+	}
+}

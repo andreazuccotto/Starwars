@@ -7,73 +7,110 @@ package it.starwars.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author pi
  */
 @Entity
-@Table(name="UTENTI")
+@Table(name = "UTENTI")
 public class Utente implements Serializable {
-    
-    public String username;
-    public String password;
-    public Boolean attivo;
-    public Integer tipoUtente;
-    public Date dataRegistrazione;
-    public Date dataUltimoAccesso;
 
-    @Id
-    public String getUsername() {
-        return username;
-    }
+	private static final long serialVersionUID = 1L;
+	private static final int USER = 1;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	@Id
+	@Column(name = "USERNAME")
+	private String username;
 
-    public String getPassword() {
-        return password;
-    }
+	@Column(name = "PASSWORD")
+	private String password;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	@Column(name = "ATTIVO")
+	private Boolean attivo;
 
-    public Boolean getAttivo() {
-        return attivo;
-    }
+	@Column(name = "TIPO_UTENTE")
+	private Integer tipoUtente;
 
-    public void setAttivo(Boolean attivo) {
-        this.attivo = attivo;
-    }
+	@Column(name = "DATA_REGISTRAZIONE")
+	private Date dataRegistrazione;
 
-    public Integer getTipoUtente() {
-        return tipoUtente;
-    }
+	@Column(name = "DATA_ULTIMO_ACCESSO")
+	private Date dataUltimoAccesso;
 
-    public void setTipoUtente(Integer tipoUtente) {
-        this.tipoUtente = tipoUtente;
-    }
+	@Column(name = "EMAIL")
+	private String email;
 
-    public Date getDataRegistrazione() {
-        return dataRegistrazione;
-    }
+	public Utente(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.attivo = false;
+		this.tipoUtente = USER;
+		Date today = new Date();
+		this.dataRegistrazione = today;
+		this.dataUltimoAccesso = today;
+	}
 
-    public void setDataRegistrazione(Date dataRegistrazione) {
-        this.dataRegistrazione = dataRegistrazione;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public Date getDataUltimoAccesso() {
-        return dataUltimoAccesso;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setDataUltimoAccesso(Date dataUltimoAccesso) {
-        this.dataUltimoAccesso = dataUltimoAccesso;
-    }
-    
-    
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Boolean getAttivo() {
+		return attivo;
+	}
+
+	public void setAttivo(Boolean attivo) {
+		this.attivo = attivo;
+	}
+
+	public Integer getTipoUtente() {
+		return tipoUtente;
+	}
+
+	public void setTipoUtente(Integer tipoUtente) {
+		this.tipoUtente = tipoUtente;
+	}
+
+	public Date getDataRegistrazione() {
+		return dataRegistrazione;
+	}
+
+	public void setDataRegistrazione(Date dataRegistrazione) {
+		this.dataRegistrazione = dataRegistrazione;
+	}
+
+	public Date getDataUltimoAccesso() {
+		return dataUltimoAccesso;
+	}
+
+	public void setDataUltimoAccesso(Date dataUltimoAccesso) {
+		this.dataUltimoAccesso = dataUltimoAccesso;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 }
