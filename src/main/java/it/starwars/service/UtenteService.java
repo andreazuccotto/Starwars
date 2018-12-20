@@ -24,53 +24,43 @@ public class UtenteService {
 	}
 
 	public static Utente getUtenteById(String username) {
-
 		Utente utente = null;
-		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
-			utente = session.get(Utente.class, username);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		utente = session.get(Utente.class, username);
 		return utente;
 	}
 
 	public static List<Utente> getUtenti() {
-
 		List<Utente> utenti = null;
-		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
-			utenti = session.createQuery("from UTENTI").list();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		utenti = session.createQuery("from UTENTI").list();
 		return utenti;
 	}
 
 	public static void save(Utente utente) {
-
-		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
-			session.beginTransaction();
-
-			session.save(utente);
-
-			session.getTransaction().commit();
-		}
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		session.beginTransaction();
+		session.save(utente);
+		session.getTransaction().commit();
 	}
 
 	public static void updateDateLastUpdate(Utente utente) {
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("update UTENTI set DATA_ULTIMO_ACCESSO = :date where username = :username");
+		query.setParameter("date", new Date());
+		query.setParameter("username", utente.getUsername());
+		query.executeUpdate();
+		session.getTransaction().commit();
+	}
 
-		try (Session session = HibernateUtils.getSessionFactory().openSession()) {
-			session.beginTransaction();
-
-			Query query = session
-					.createQuery("update UTENTI set DATA_ULTIMO_ACCESSO = :date where username = :username");
-			query.setParameter("date", new Date());
-			query.setParameter("username", utente.getUsername());
-			query.executeUpdate();
-
-			session.getTransaction().commit();
-		}
+	public static void updateAttivaUtente(String username) {
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		session.beginTransaction();
+		Query query = session.createQuery("update UTENTI set ATTIVO = true where username = :username");
+		query.setParameter("username", username);
+		query.executeUpdate();
+		session.getTransaction().commit();
 	}
 
 }

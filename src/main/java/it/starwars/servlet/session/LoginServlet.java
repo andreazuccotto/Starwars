@@ -40,7 +40,13 @@ public class LoginServlet extends HttpServlet {
 		String username = MyUtils.getSafeString(request.getParameter(MyConstants.USERNAME));
 		String password = MyUtils.getSafeString(request.getParameter(MyConstants.PASSWORD));
 
-		Utente utente = UtenteService.getUtenteById(username);
+		Utente utente = null;
+		try {
+			utente = UtenteService.getUtenteById(username);
+		} catch (Exception e) {
+			getServletContext().log("Impossibile ricercare l'utente sul db", e);
+			return;
+		}
 
 		if (utente == null) {
 			RequestDispatcher rd = getServletContext().getRequestDispatcher(LOGIN_PATH);
@@ -79,7 +85,11 @@ public class LoginServlet extends HttpServlet {
 
 		newSession.setAttribute(MyConstants.USER, utente);
 
-		UtenteService.updateDateLastUpdate(utente);
+		try {
+			UtenteService.updateDateLastUpdate(utente);
+		} catch (Exception e) {
+			getServletContext().log("Impossibile aggiornare la data ultimo accesso", e);
+		}
 
 		response.sendRedirect(HOMEPAGE_PATH);
 

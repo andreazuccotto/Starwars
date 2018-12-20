@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
-import it.starwars.bean.Utente;
 import it.starwars.service.UtenteService;
 import it.starwars.util.MyConstants;
 
@@ -39,11 +38,11 @@ public class EnableUserServlet extends HttpServlet {
 		String username = request.getParameter(MyConstants.USERNAME);
 
 		if (StringUtils.isNotBlank(username)) {
-			Utente utente = UtenteService.getUtenteById(username);
 
-			if (utente != null) {
-				utente.setAttivo(true);
-
+			try {
+				UtenteService.updateAttivaUtente(username);
+			} catch (Exception e) {
+				getServletContext().log("Impossibile attivare l'utente", e);
 			}
 
 		}

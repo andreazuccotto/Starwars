@@ -8,30 +8,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 		
 		<title>Homepage</title>
 	</head>
 	<body class="bg-secondary">
 	
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="/main/homepage.jsp">
-						<i title="Home" class="fas fa-home"></i>
-						<span class="sr-only">(current)</span>
-					</a>
-				</li>
-			</ul>
-			<span class="navbar-text">
-				Benvenuto {}
-			</span>
-			<span class="navbar-text">
-				<a class="nav-link" href="#">
-					<i title="Impostazioni" class="fas fa-cog"></i>
-					<span class="sr-only">(current)</span>
-				</a>
-			</span>
-		</nav> 
+		<jsp:include page="header.jsp" />
 		
 		<main>
 			<div class="container mt-5">

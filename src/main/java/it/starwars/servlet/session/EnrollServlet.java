@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import it.starwars.bean.Utente;
 import it.starwars.service.UtenteService;
 import it.starwars.util.MyConstants;
+import it.starwars.util.MyUtils;
 
 /**
  * Servlet implementation class EnrollServlet
@@ -26,8 +28,6 @@ import it.starwars.util.MyConstants;
 public class EnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final String HOSTNAME = "mail.smtp.host";
-	private static final int PORT = 465;
 	private static final String USERNAME = "gmail";
 	private static final String PASSWORD = "";
 	private static final String MAIL_SUBJECT = "Registrazione it.starwars";
@@ -48,48 +48,54 @@ public class EnrollServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		try {
-			UtenteService.save(
-					new Utente(request.getParameter(MyConstants.USERNAME), request.getParameter(MyConstants.PASSWORD)));
+		String username = request.getParameter(MyConstants.USERNAME);
 
-			sendEmail(request.getParameter(MyConstants.EMAIL));
+		try {
+			UtenteService.save(new Utente(username, request.getParameter(MyConstants.PASSWORD)));
 		} catch (Exception e) {
-			// TODO: handle exception
+			getServletContext().log("Impossibile creare un nuovo utente sul db", e);
 		}
+
+		sendEmail(request.getParameter(MyConstants.EMAIL), username);
 
 	}
 
-	private void sendEmail(String email) {
+	private void sendEmail(String email, String username) {
 
-		// Get system properties
-		Properties properties = System.getProperties();
+		Properties properties = new Properties();
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.port", "587");
 
-		// Setup mail server
-		properties.setProperty("mail.smtp.host", "localhost");
-
-		// Get the default Session object.
-		Session session = Session.getDefaultInstance(properties);
+		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(USERNAME, PASSWORD);
+			}
+		});
 
 		try {
-			// Create a default MimeMessage object.
-			MimeMessage message = new MimeMessage(session);
 
-			// Set From: header field of the header.
+			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(MAIL_FROM));
-
-			// Set To: header field of the header.
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
-
-			// Set Subject: header field
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 			message.setSubject(MAIL_SUBJECT);
 
-			// Now set the actual message
-			message.setText("This is actual message");
+			StringBuilder sb = new StringBuilder();
+			sb.append("Benvenuto ");
+			sb.append(username);
+			sb.append("!\n\nGrazie per esserti registrato, clicca il seguente link per attivare il tuo account:\n\n");
+			sb.append(MyUtils.getProperties("ENABLE_USER_SERVLET_PATH"));
+			sb.append("?username=");
+			sb.append(username);
 
-			// Send message
+			message.setText(sb.toString());
+
 			Transport.send(message);
-		} catch (MessagingException mex) {
-			mex.printStackTrace();
+
+		} catch (MessagingException e) {
+			getServletContext().log("Errore in EnrollServlet.sendEmail", e);
 		}
 	}
 }
