@@ -66,6 +66,8 @@
 					<url>http://localhost:8080/manager/text</url>
 					<server>TomcatServer</server>
 					<path>/Starwars</path>
+					<username>admin</username>
+					<password>password</password>
 				</configuration>
 			</plugin>
 
