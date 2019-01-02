@@ -24,7 +24,6 @@ public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final int USER = 1;
 
-	@Id
 	@Column(name = "USERNAME")
 	private String username;
 
@@ -61,6 +60,7 @@ public class Utente implements Serializable {
 		this.dataUltimoAccesso = today;
 	}
 
+	@Id
 	public String getUsername() {
 		return username;
 	}
