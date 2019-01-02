@@ -46,6 +46,10 @@ public class Utente implements Serializable {
 	@Column(name = "EMAIL")
 	private String email;
 
+	public Utente() {
+		super();
+	}
+
 	public Utente(String username, String password) {
 		super();
 		this.username = username;
