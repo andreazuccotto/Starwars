@@ -24,25 +24,13 @@ public class Utente implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final int USER = 1;
 
-	@Column(name = "USERNAME")
+
 	private String username;
-
-	@Column(name = "PASSWORD")
 	private String password;
-
-	@Column(name = "ATTIVO")
 	private Boolean attivo;
-
-	@Column(name = "TIPO_UTENTE")
 	private Integer tipoUtente;
-
-	@Column(name = "DATA_REGISTRAZIONE")
 	private Date dataRegistrazione;
-
-	@Column(name = "DATA_ULTIMO_ACCESSO")
 	private Date dataUltimoAccesso;
-
-	@Column(name = "EMAIL")
 	private String email;
 
 	public Utente() {
@@ -61,6 +49,7 @@ public class Utente implements Serializable {
 	}
 
 	@Id
+	@Column(name = "USERNAME")
 	public String getUsername() {
 		return username;
 	}
@@ -69,6 +58,7 @@ public class Utente implements Serializable {
 		this.username = username;
 	}
 
+	@Column(name = "PASSWORD")
 	public String getPassword() {
 		return password;
 	}
@@ -77,6 +67,7 @@ public class Utente implements Serializable {
 		this.password = password;
 	}
 
+	@Column(name = "ATTIVO")
 	public Boolean getAttivo() {
 		return attivo;
 	}
@@ -85,6 +76,7 @@ public class Utente implements Serializable {
 		this.attivo = attivo;
 	}
 
+	@Column(name = "TIPO_UTENTE")
 	public Integer getTipoUtente() {
 		return tipoUtente;
 	}
@@ -93,6 +85,7 @@ public class Utente implements Serializable {
 		this.tipoUtente = tipoUtente;
 	}
 
+	@Column(name = "DATA_REGISTRAZIONE")
 	public Date getDataRegistrazione() {
 		return dataRegistrazione;
 	}
@@ -101,6 +94,7 @@ public class Utente implements Serializable {
 		this.dataRegistrazione = dataRegistrazione;
 	}
 
+	@Column(name = "DATA_ULTIMO_ACCESSO")
 	public Date getDataUltimoAccesso() {
 		return dataUltimoAccesso;
 	}
@@ -109,6 +103,7 @@ public class Utente implements Serializable {
 		this.dataUltimoAccesso = dataUltimoAccesso;
 	}
 
+	@Column(name = "EMAIL")
 	public String getEmail() {
 		return email;
 	}
