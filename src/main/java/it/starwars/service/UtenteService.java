@@ -33,7 +33,7 @@ public class UtenteService {
 	public static List<Utente> getUtenti() {
 		List<Utente> utenti = null;
 		Session session = HibernateUtils.getSessionFactory().openSession();
-		utenti = session.createQuery("from UTENTI").list();
+		utenti = session.createQuery("from Utente").list();
 		return utenti;
 	}
 
