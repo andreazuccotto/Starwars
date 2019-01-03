@@ -36,6 +36,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		System.out.println("Invocata LoginServlet");
+
 		// get request parameters for username and password
 		String username = MyUtils.getSafeString(request.getParameter(MyConstants.USERNAME));
 		String password = MyUtils.getSafeString(request.getParameter(MyConstants.PASSWORD));
