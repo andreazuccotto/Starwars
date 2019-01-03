@@ -6,6 +6,7 @@
 package it.starwars.servlet.session;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.starwars.bean.Utente;
 import it.starwars.service.UtenteService;
 import it.starwars.util.MyConstants;
 import it.starwars.util.MyUtils;
@@ -41,7 +43,8 @@ public class LoginServlet extends HttpServlet {
 
 
 		try {
-			UtenteService.getUtenti();
+			List<Utente> list = UtenteService.getUtenti();
+			getServletContext().log("" + list.size());
 		} catch (Exception e) {
 			getServletContext().log("Impossibile ricercare l'utente sul db", e);
 			return;
