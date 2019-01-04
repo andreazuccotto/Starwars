@@ -8,17 +8,10 @@ package it.starwars.bean;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 /**
  *
  * @author pi
  */
-@Entity
-@Table(name = "UTENTI")
 public class Utente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -48,8 +41,6 @@ public class Utente implements Serializable {
 		this.dataUltimoAccesso = today;
 	}
 
-	@Id
-	@Column(name = "USERNAME")
 	public String getUsername() {
 		return username;
 	}
@@ -58,7 +49,6 @@ public class Utente implements Serializable {
 		this.username = username;
 	}
 
-	@Column(name = "PASSWORD")
 	public String getPassword() {
 		return password;
 	}
@@ -67,7 +57,6 @@ public class Utente implements Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "ATTIVO")
 	public Boolean getAttivo() {
 		return attivo;
 	}
@@ -76,7 +65,6 @@ public class Utente implements Serializable {
 		this.attivo = attivo;
 	}
 
-	@Column(name = "TIPO_UTENTE")
 	public Integer getTipoUtente() {
 		return tipoUtente;
 	}
@@ -85,7 +73,6 @@ public class Utente implements Serializable {
 		this.tipoUtente = tipoUtente;
 	}
 
-	@Column(name = "DATA_REGISTRAZIONE")
 	public Date getDataRegistrazione() {
 		return dataRegistrazione;
 	}
@@ -94,7 +81,6 @@ public class Utente implements Serializable {
 		this.dataRegistrazione = dataRegistrazione;
 	}
 
-	@Column(name = "DATA_ULTIMO_ACCESSO")
 	public Date getDataUltimoAccesso() {
 		return dataUltimoAccesso;
 	}
@@ -103,7 +89,6 @@ public class Utente implements Serializable {
 		this.dataUltimoAccesso = dataUltimoAccesso;
 	}
 
-	@Column(name = "EMAIL")
 	public String getEmail() {
 		return email;
 	}
