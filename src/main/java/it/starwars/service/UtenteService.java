@@ -47,7 +47,7 @@ public class UtenteService {
 	public static void updateDateLastUpdate(Utente utente) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		session.beginTransaction();
-		Query query = session.createQuery("update UTENTI set DATA_ULTIMO_ACCESSO = :date where username = :username");
+		Query query = session.createQuery("update Utente set dataUltimoAccesso = :date where username = :username");
 		query.setParameter("date", new Date());
 		query.setParameter("username", utente.getUsername());
 		query.executeUpdate();
@@ -57,7 +57,7 @@ public class UtenteService {
 	public static void updateAttivaUtente(String username) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		session.beginTransaction();
-		Query query = session.createQuery("update UTENTI set ATTIVO = true where username = :username");
+		Query query = session.createQuery("update Utente set attivo = true where username = :username");
 		query.setParameter("username", username);
 		query.executeUpdate();
 		session.getTransaction().commit();
