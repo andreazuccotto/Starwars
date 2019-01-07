@@ -5,5 +5,5 @@
 		type="javax.sql.DataSource"
 		driverClassName="org.apache.derby.jdbc.ClientDriver"
 		username="starwars" password="starwars"
-		url="jdbc:postgresql://localhost:5433/Starwars" maxActive="10" maxIdle="4" />
+		url="jdbc:postgresql://localhost:5432/Starwars" maxActive="10" maxIdle="4" />
 </Context>

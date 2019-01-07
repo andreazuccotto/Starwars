@@ -6,7 +6,7 @@
     <session-factory>
         <!-- Database connection settings -->
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://localhost:5433/Starwars</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/Starwars</property>
         <property name="connection.username">starwars</property>
         <property name="connection.password">starwars</property>
 
