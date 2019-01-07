@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/Starwars">
 
-	<Resource name="jdbc/Starwars" auth="Container"
+	<Resource name="jdbc/postgres" auth="Container"
 		type="javax.sql.DataSource"
 		driverClassName="org.apache.derby.jdbc.ClientDriver"
 		username="starwars" password="starwars"
-		url="jdbc:derby://localhost:1527/Starwars" maxActive="10" maxIdle="4" />
+		url="jdbc:postgresql://localhost:5433/Starwars" maxActive="10" maxIdle="4" />
 </Context>
