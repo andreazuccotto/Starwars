@@ -24,6 +24,6 @@
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
 
-		<mapping resource="src/main/java/it/starwars/hibernate/Utente.hbm.xml"></mapping>
+		<mapping class="it.starwars.bean.Utente"/>
 	</session-factory>
 </hibernate-configuration>
