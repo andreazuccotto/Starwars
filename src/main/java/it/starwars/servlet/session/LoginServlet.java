@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 
 		Utente utente = null;
 		try {
-			utente = UtenteService.getUtenteById(username);
+			utente = UtenteService.getUtenteByUserAndPwd(username, password);
 		} catch (Exception e) {
 			getServletContext().log("Impossibile ricercare l'utente sul db", e);
 			return;

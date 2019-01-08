@@ -23,10 +23,10 @@ public class UtenteService {
 	private UtenteService() {
 	}
 
-	public static Utente getUtenteById(String username) {
+	public static Utente getUtenteByUserAndPwd(String username, String password) {
 		Utente utente = null;
 		Session session = HibernateUtils.getSessionFactory().openSession();
-		utente = session.get(Utente.class, username);
+		utente = (Utente) session.createQuery("from Utente where username = :username and password = crypt(:password, password)").uniqueResult();
 		return utente;
 	}
 

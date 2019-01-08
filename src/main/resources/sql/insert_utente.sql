@@ -1,1 +1,1 @@
-INSERT INTO UTENTI VALUES ('master', 'spartan118', true, 0, null, null, 'andryz.89@gmail.com');
+INSERT INTO UTENTI(USERNAME, PASSWORD, ATTIVO, TIPO_UTENTE, EMAIL) VALUES ('master', 'spartan118', true, 0, 'andryz.89@gmail.com');
