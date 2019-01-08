@@ -53,15 +53,7 @@ public class LoginServlet extends HttpServlet {
 		if (utente == null) {
 			RequestDispatcher rd = getServletContext().getRequestDispatcher(LOGIN_PATH);
 			PrintWriter out = response.getWriter();
-			out.println("<font color=red>Username non corretta.</font>");
-			rd.include(request, response);
-			return;
-		}
-
-		if (!password.equals(utente.getPassword())) {
-			RequestDispatcher rd = getServletContext().getRequestDispatcher(LOGIN_PATH);
-			PrintWriter out = response.getWriter();
-			out.println("<font color=red>Password non corretta.</font>");
+			out.println("<font color=red>Username o password non corretta.</font>");
 			rd.include(request, response);
 			return;
 		}
