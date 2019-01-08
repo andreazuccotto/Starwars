@@ -26,7 +26,7 @@ public class UtenteService {
 	public static Utente getUtenteByUserAndPwd(String username, String password) {
 		Utente utente = null;
 		Session session = HibernateUtils.getSessionFactory().openSession();
-		utente = (Utente) session.createQuery("from Utente where username = :username and password = crypt(:password, password)").uniqueResult();
+		utente = (Utente) session.createQuery("from Utente where username = :username and password = crypt(:password, password)").setParameter("username", username).setParameter("password", password).uniqueResult();
 		return utente;
 	}
 
