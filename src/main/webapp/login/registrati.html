@@ -11,18 +11,21 @@
     <link href="../css/signin.css" rel="stylesheet">
     <title>Registrati</title>
 </head>
-<body class="text-center">
-	<form class="form-signin" action="LoginServlet" method="post">
-		<h1 class="h3 mb-3 font-weight-normal">Registrazione</h1>
-		<label for="inputEmail" class="sr-only">Email</label>
-		<input name="email" type="text" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-		<label for="inputUsername" class="sr-only">Nome utente</label>
-		<input name="username" type="text" id="inputUsername" class="form-control" placeholder="Username" required>
-		<label for="inputPassword" class="sr-only">Password</label>
-		<input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-		<label for="inputConfirmPassword" class="sr-only">Conferma Password</label>
-		<input name="confirmPassword" type="password" id="inputConfirmPassword" class="form-control" placeholder="Conferma Password" required>
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Registrati</button>
-	</form>
+<body>
+	<div class="container text-center">
+		<form class="form-signin" action="LoginServlet" method="post">
+			<h1 class="h3 mb-3 font-weight-normal">Registrazione</h1>
+			<label for="inputEmail" class="sr-only">Email</label>
+			<input name="email" type="text" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+			<label for="inputUsername" class="sr-only">Nome utente</label>
+			<input name="username" type="text" id="inputUsername" class="form-control" placeholder="Username" required>
+			<label for="inputPassword" class="sr-only">Password</label>
+			<input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+			<label for="inputConfirmPassword" class="sr-only">Conferma Password</label>
+			<input name="confirmPassword" type="password" id="inputConfirmPassword" class="form-control" placeholder="Conferma Password" required>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Registrati</button>
+		</form>
+		<a class="btn btn-link" href="loginPage.html">Torna alla login</a>
+	</div>
 </body>
 </html>
