@@ -25,7 +25,7 @@ import it.starwars.util.MyUtils;
  *
  * @author pi
  */
-@WebServlet("/LoginServlet")
+@WebServlet("/login/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int MAX_INACTIVE_INTERVAL = 300;

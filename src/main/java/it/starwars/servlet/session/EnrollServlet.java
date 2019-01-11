@@ -24,7 +24,7 @@ import it.starwars.util.MyUtils;
 /**
  * Servlet implementation class EnrollServlet
  */
-@WebServlet("/EnrollServlet")
+@WebServlet("/login/EnrollServlet")
 public class EnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
