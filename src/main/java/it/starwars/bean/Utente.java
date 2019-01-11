@@ -22,8 +22,6 @@ import javax.persistence.Table;
 public class Utente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final int USER = 1;
-
 
 	private String username;
 	private String password;
@@ -37,15 +35,11 @@ public class Utente implements Serializable {
 		super();
 	}
 
-	public Utente(String username, String password) {
+	public Utente(String username, String password, String email) {
 		super();
 		this.username = username;
 		this.password = password;
-		this.attivo = false;
-		this.tipoUtente = USER;
-		Date today = new Date();
-		this.dataRegistrazione = today;
-		this.dataUltimoAccesso = today;
+		this.email = email;
 	}
 
 	@Id
