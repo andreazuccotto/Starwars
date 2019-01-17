@@ -64,6 +64,8 @@ public class EnrollServlet extends HttpServlet {
 
 		sendEmail(request.getParameter(MyConstants.EMAIL), username);
 
+		response.sendRedirect(request.getHeader("Referer"));
+
 	}
 
 	private void sendEmail(String email, String username) {
