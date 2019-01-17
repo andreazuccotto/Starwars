@@ -39,11 +39,13 @@ public class UtenteService {
 
 	public static void insertNewUtente(Utente utente) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
-		Query query = session.createSQLQuery("insert into Utente (username, password, attivo, email) VALUES :username, crypt(:password, gen_salt('bf')), 0, :email");
+		session.beginTransaction();
+		Query query = session.createQuery("insert into Utente (username, password, attivo, email) VALUES :username, crypt(:password, gen_salt('bf')), 0, :email");
 		query.setParameter("username", utente.getUsername());
 		query.setParameter("password", utente.getPassword());
 		query.setParameter("email", utente.getEmail());
 		query.executeUpdate();
+		session.getTransaction().commit();
 	}
 
 	public static void save(Utente utente) {
