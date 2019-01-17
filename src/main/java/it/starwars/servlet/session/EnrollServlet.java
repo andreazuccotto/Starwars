@@ -31,7 +31,6 @@ public class EnrollServlet extends HttpServlet {
 	private static String MAIL_USERNAME = "";
 	private static String MAIL_PASSWORD = "";
 	private static final String MAIL_SUBJECT = "Registrazione it.starwars";
-	private static final String MAIL_FROM = "noreply@starwars.it";
 
 	static {
 		MAIL_USERNAME = MyUtils.getProperties("MAIL_USERNAME");
@@ -86,7 +85,7 @@ public class EnrollServlet extends HttpServlet {
 		try {
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(MAIL_FROM));
+			message.setFrom(new InternetAddress(MAIL_USERNAME));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 			message.setSubject(MAIL_SUBJECT);
 
