@@ -47,8 +47,6 @@ public class EnableUserServlet extends HttpServlet {
 
 		}
 
-		response.sendRedirect(request.getHeader("Referer"));
-
 	}
 
 	/**
