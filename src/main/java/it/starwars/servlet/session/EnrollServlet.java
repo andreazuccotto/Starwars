@@ -63,7 +63,7 @@ public class EnrollServlet extends HttpServlet {
 
 		sendEmail(request.getParameter(MyConstants.EMAIL), username);
 
-		response.sendRedirect("/login/loginPage.html");
+		response.sendRedirect("/Starwars/login/loginPage.html");
 
 	}
 
