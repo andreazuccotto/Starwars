@@ -28,10 +28,15 @@ import it.starwars.util.MyUtils;
 public class EnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static final String USERNAME = "gmail";
-	private static final String PASSWORD = "";
+	private static String MAIL_USERNAME = "";
+	private static String MAIL_PASSWORD = "";
 	private static final String MAIL_SUBJECT = "Registrazione it.starwars";
 	private static final String MAIL_FROM = "noreply@starwars.it";
+
+	static {
+		MAIL_USERNAME = MyUtils.getProperties("MAIL_USERNAME");
+		MAIL_PASSWORD = MyUtils.getProperties("MAIL_PASSWORD");
+	}
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -66,13 +71,13 @@ public class EnrollServlet extends HttpServlet {
 		Properties properties = new Properties();
 		properties.put("mail.smtp.auth", "true");
 		properties.put("mail.smtp.starttls.enable", "true");
-		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.host", "smtp.tim.it");
 		properties.put("mail.smtp.port", "587");
 
 		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(USERNAME, PASSWORD);
+				return new PasswordAuthentication(MAIL_USERNAME, MAIL_PASSWORD);
 			}
 		});
 
