@@ -16,7 +16,7 @@ import it.starwars.util.MyConstants;
 /**
  * Servlet implementation class EnableUserServlet
  */
-@WebServlet("/EnableUserServlet")
+@WebServlet("/login/EnableUserServlet")
 public class EnableUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -47,6 +47,7 @@ public class EnableUserServlet extends HttpServlet {
 
 		}
 
+		response.sendRedirect("/login/loginPage.html");
 	}
 
 	/**
