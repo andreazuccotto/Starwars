@@ -40,7 +40,7 @@ public class UtenteService {
 	public static void insertNewUtente(Utente utente) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		session.beginTransaction();
-		Query query = session.createNativeQuery("insert into Utente (username, password, attivo, email) VALUES (:username, crypt(:password, gen_salt('bf')), 0, :email)");
+		Query query = session.createNativeQuery("INSERT INTO UTENTI (USERNAME, PASSWORD, ATTIVO, EMAIL) VALUES (:username, crypt(:password, gen_salt('bf')), 0, :email)");
 		query.setParameter("username", utente.getUsername());
 		query.setParameter("password", utente.getPassword());
 		query.setParameter("email", utente.getEmail());
