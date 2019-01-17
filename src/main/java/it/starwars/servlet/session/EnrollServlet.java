@@ -71,7 +71,7 @@ public class EnrollServlet extends HttpServlet {
 		Properties properties = new Properties();
 		properties.put("mail.smtp.auth", "true");
 		properties.put("mail.smtp.starttls.enable", "true");
-		properties.put("mail.smtp.host", "smtp.tim.it");
+		properties.put("mail.smtp.host", "out.alice.it");
 		properties.put("mail.smtp.port", "587");
 
 		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
