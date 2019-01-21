@@ -7,7 +7,7 @@
 			</a>
 		</li>
 	</ul>
-	<span class="navbar-text">${session.user.username}</span>
+	<span class="navbar-text">${sessionScope.user.username}</span>
 	<span class="navbar-text">
 		<a class="nav-link" href="/main/settings.jsp">
 			<i title="Impostazioni" class="fas fa-cog"></i>
