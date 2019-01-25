@@ -47,7 +47,7 @@ public class EnableUserServlet extends HttpServlet {
 
 		}
 
-		response.sendRedirect("/Starwars/login/loginPage.html");
+		response.sendRedirect(MyConstants.FULL_LOGIN_PATH);
 	}
 
 	/**

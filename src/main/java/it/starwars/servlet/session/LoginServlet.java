@@ -28,7 +28,6 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int MAX_INACTIVE_INTERVAL = 300;
 	private static final String ERROR = "error";
-	private static final String LOGIN_PATH = "/login/login.jsp";
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -46,19 +45,19 @@ public class LoginServlet extends HttpServlet {
 		} catch (Exception e) {
 			getServletContext().log("Impossibile ricercare l'utente sul db", e);
 			request.setAttribute(ERROR, "Errore del server");
-			request.getRequestDispatcher(LOGIN_PATH).forward(request, response);
+			request.getRequestDispatcher(MyConstants.LOGIN_PATH).forward(request, response);
 			return;
 		}
 
 		if (utente == null) {
 			request.setAttribute(ERROR, "Username o password non corretta");
-			request.getRequestDispatcher(LOGIN_PATH).forward(request, response);
+			request.getRequestDispatcher(MyConstants.LOGIN_PATH).forward(request, response);
 			return;
 		}
 
 		if (!utente.getAttivo()) {
 			request.setAttribute(ERROR, "Utente non attivo");
-			request.getRequestDispatcher(LOGIN_PATH).forward(request, response);
+			request.getRequestDispatcher(MyConstants.LOGIN_PATH).forward(request, response);
 			return;
 		}
 
