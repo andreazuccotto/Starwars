@@ -54,12 +54,15 @@ public class EnrollServlet extends HttpServlet {
 
 		String username = request.getParameter(MyConstants.USERNAME);
 		String email = request.getParameter(MyConstants.EMAIL);
+		String password = request.getParameter(MyConstants.PASSWORD);
 
-		try {
-			UtenteService.insertNewUtente(new Utente(username, request.getParameter(MyConstants.PASSWORD), email));
-		} catch (Exception e) {
-			getServletContext().log("Impossibile creare un nuovo utente sul db", e);
-		}
+		if (password.equals(request.getParameter("")))
+
+			try {
+				UtenteService.insertNewUtente(new Utente(username, password, email));
+			} catch (Exception e) {
+				getServletContext().log("Impossibile creare un nuovo utente sul db", e);
+			}
 
 		sendEmail(request.getParameter(MyConstants.EMAIL), username);
 

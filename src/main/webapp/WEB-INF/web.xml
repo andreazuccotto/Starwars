@@ -9,7 +9,7 @@
     <url-pattern>/main/*</url-pattern>
   </filter-mapping>
   <welcome-file-list>
-    <welcome-file>/login/loginPage.html</welcome-file>
+    <welcome-file>/login/loginPage.jsp</welcome-file>
   </welcome-file-list>
   <session-config>
     <session-timeout>30</session-timeout>

@@ -26,7 +26,9 @@ public class UtenteService {
 	public static Utente getUtenteByUserAndPwd(String username, String password) {
 		Utente utente = null;
 		Session session = HibernateUtils.getSessionFactory().openSession();
-		utente = (Utente) session.createQuery("from Utente where username = :username and password = crypt(:password, password)").setParameter("username", username).setParameter("password", password).uniqueResult();
+		utente = (Utente) session
+				.createQuery("from Utente where username = :username and password = crypt(:password, password)")
+				.setParameter("username", username).setParameter("password", password).uniqueResult();
 		return utente;
 	}
 
@@ -40,12 +42,26 @@ public class UtenteService {
 	public static void insertNewUtente(Utente utente) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		session.beginTransaction();
-		Query query = session.createNativeQuery("INSERT INTO UTENTI (USERNAME, PASSWORD, ATTIVO, EMAIL) VALUES (:username, crypt(:password, gen_salt('bf')), FALSE, :email)");
+		Query query = session.createNativeQuery(
+				"INSERT INTO UTENTI (USERNAME, PASSWORD, ATTIVO, EMAIL) VALUES (:username, crypt(:password, gen_salt('bf')), FALSE, :email)");
 		query.setParameter("username", utente.getUsername());
 		query.setParameter("password", utente.getPassword());
 		query.setParameter("email", utente.getEmail());
 		query.executeUpdate();
 		session.getTransaction().commit();
+	}
+
+	public static boolean updateUserPassword(Utente utente) {
+		Session session = HibernateUtils.getSessionFactory().openSession();
+		session.beginTransaction();
+		Query query = session.createNativeQuery(
+				"UPDATE UTENTI SET PASSWORD = crypt(:newpassword, gen_salt('bf')) WHERE ID = :id AND PASSWORD = :oldpassword");
+		query.setParameter("username", utente.getUsername());
+		query.setParameter("password", utente.getPassword());
+		query.setParameter("email", utente.getEmail());
+		int result = query.executeUpdate();
+		session.getTransaction().commit();
+		return result > 0;
 	}
 
 	public static void save(Utente utente) {

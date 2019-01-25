@@ -6,9 +6,7 @@
 package it.starwars.servlet.session;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,8 +27,7 @@ import it.starwars.util.MyUtils;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int MAX_INACTIVE_INTERVAL = 300;
-	private static final String LOGIN_PATH = "/login/loginPage.html";
-	private static final String HOMEPAGE_PATH = "/Starwars/main/homepage.jsp";
+	private static final String ERROR = "error";
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -47,22 +44,20 @@ public class LoginServlet extends HttpServlet {
 			utente = UtenteService.getUtenteByUserAndPwd(username, password);
 		} catch (Exception e) {
 			getServletContext().log("Impossibile ricercare l'utente sul db", e);
+			request.setAttribute(ERROR, "Errore del server");
+			request.getRequestDispatcher(MyConstants.LOGIN_PATH).forward(request, response);
 			return;
 		}
 
 		if (utente == null) {
-			RequestDispatcher rd = getServletContext().getRequestDispatcher(LOGIN_PATH);
-			PrintWriter out = response.getWriter();
-			out.println("<font color=red>Username o password non corretta.</font>");
-			rd.include(request, response);
+			request.setAttribute(ERROR, "Username o password non corretta");
+			request.getRequestDispatcher(MyConstants.LOGIN_PATH).forward(request, response);
 			return;
 		}
 
 		if (!utente.getAttivo()) {
-			RequestDispatcher rd = getServletContext().getRequestDispatcher(LOGIN_PATH);
-			PrintWriter out = response.getWriter();
-			out.println("<font color=red>Utente non attivo.</font>");
-			rd.include(request, response);
+			request.setAttribute(ERROR, "Utente non attivo");
+			request.getRequestDispatcher(MyConstants.LOGIN_PATH).forward(request, response);
 			return;
 		}
 
@@ -77,6 +72,7 @@ public class LoginServlet extends HttpServlet {
 		// setting session to expiry in 5 mins
 		newSession.setMaxInactiveInterval(MAX_INACTIVE_INTERVAL);
 
+		utente.setPassword(null);
 		newSession.setAttribute(MyConstants.USER, utente);
 
 		try {
@@ -85,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 			getServletContext().log("Impossibile aggiornare la data ultimo accesso", e);
 		}
 
-		response.sendRedirect(HOMEPAGE_PATH);
+		response.sendRedirect(MyConstants.HOMEPAGE_PATH);
 
 	}
 }
