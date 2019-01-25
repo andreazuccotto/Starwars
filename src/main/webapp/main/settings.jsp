@@ -19,11 +19,11 @@
 	<jsp:include page="header.jsp" />
 
 	<main>
-	<div class="container">
+	<div class="container mt-5">
 
-		<h2>Impostazioni</h2>
+		<h2 class="text-light">Impostazioni</h2>
 
-		<div class="table-responsive">
+		<div class="table-responsive bg-light">
 			<table class="table table-striped">
 				<thead>
 					<tr>
