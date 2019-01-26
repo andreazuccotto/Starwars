@@ -25,7 +25,9 @@
 			<input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Accedi</button>
 		</form>
-		<div class="alert alert-danger" role="alert">${errorMessage}</div>
+		<c:if test="${not empty errorMessage}">
+			<div class="alert alert-danger" role="alert">${errorMessage}</div>
+		</c:if>
 		<a class="btn btn-link" href="recuperaPassword.html">Password dimenticata?</a>
 		<a class="btn btn-link" href="registrati.html">Registrati</a>
 	</div>

@@ -78,8 +78,12 @@
 							</div>
 							<button type="submit" class="btn btn-primary mb-2">Modifica</button>
 						</form>
-						<div class="alert alert-success" role="alert">${infoMessage}</div>
-						<div class="alert alert-danger" role="alert">${errorMessage}</div>
+						<c:if test="${not empty infoMessage}">
+							<div class="alert alert-success" role="alert">${infoMessage}</div>
+						</c:if>
+						<c:if test="${not empty errorMessage}">
+							<div class="alert alert-danger" role="alert">${errorMessage}</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
