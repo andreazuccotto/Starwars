@@ -38,18 +38,14 @@
 					<tr>
 						<td>${sessionScope.user.username}</td>
 						<td>${sessionScope.user.email}</td>
-						<td>
-							<c:choose>
+						<td><c:choose>
 								<c:when test="${sessionScope.user.tipoUtente == 0}">Admin</c:when>
 								<c:otherwise>User</c:otherwise>
-							</c:choose>
-						</td>
-						<td>
-							<fmt:formatDate type="both" dateStyle="short" timeStyle="medium" value="${sessionScope.user.dataRegistrazione}" />
-						</td>
-						<td>
-							<fmt:formatDate type="both" dateStyle="short" timeStyle="medium" value="${sessionScope.user.dataUltimoAccesso}" />
-						</td>
+							</c:choose></td>
+						<td><fmt:formatDate type="both" dateStyle="short" timeStyle="medium"
+								value="${sessionScope.user.dataRegistrazione}" /></td>
+						<td><fmt:formatDate type="both" dateStyle="short" timeStyle="medium"
+								value="${sessionScope.user.dataUltimoAccesso}" /></td>
 					</tr>
 				</tbody>
 			</table>
@@ -67,18 +63,23 @@
 
 				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
 					<div class="card-body">
-						<form>
-							<div class="form-group">
-								<label for="exampleInputEmail1">Email address</label>
-								<input type="email" class="form-control"
-									id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+						<form class="form-inline">
+							<div class="form-group mb-2">
+								<label for="inputCurPassword">Password corrente</label>
+								<input id="inputCurPassword" name="oldPassword" type="password" class="form-control-plaintext" required>
 							</div>
-							<div class="form-group">
-								<label for="exampleInputPassword1">Password</label> <input type="password" class="form-control"
-									id="exampleInputPassword1" placeholder="Password">
+							<div class="form-group mb-2">
+								<label for="inputNewPassword">Nuova password</label>
+								<input id="inputNewPassword" name="newPassword" type="password" class="form-control-plaintext" required>
 							</div>
-							<button type="submit" class="btn btn-primary">Modifica</button>
+							<div class="form-group mb-2">
+								<label for="inputConfirmPassword">Conferma nuova password</label>
+								<input id="inputConfirmPassword" name="confirmPassword" type="password" class="form-control-plaintext" required>
+							</div>
+							<button type="submit" class="btn btn-primary mb-2">Modifica</button>
 						</form>
+						<div class="alert alert-success" role="alert">${infoMessage}</div>
+						<div class="alert alert-danger" role="alert">${errorMessage}</div>
 					</div>
 				</div>
 			</div>

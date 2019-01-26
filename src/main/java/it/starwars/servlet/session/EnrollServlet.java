@@ -56,17 +56,31 @@ public class EnrollServlet extends HttpServlet {
 		String email = request.getParameter(MyConstants.EMAIL);
 		String password = request.getParameter(MyConstants.PASSWORD);
 
-		if (password.equals(request.getParameter("")))
+		if (!password.equals(request.getParameter("confirmPassword"))) {
+			request.setAttribute(MyConstants.ERROR, "La password di conferma non è corretta");
+			request.getRequestDispatcher(request.getRequestURI()).forward(request, response);
+			return;
+		}
 
-			try {
-				UtenteService.insertNewUtente(new Utente(username, password, email));
-			} catch (Exception e) {
-				getServletContext().log("Impossibile creare un nuovo utente sul db", e);
-			}
+		try {
+			UtenteService.insertNewUtente(new Utente(username, password, email));
+		} catch (Exception e) {
+			getServletContext().log("Impossibile creare un nuovo utente sul db", e);
+			request.setAttribute(MyConstants.ERROR, "Errore in fase di creazione utente");
+			request.getRequestDispatcher(request.getRequestURI()).forward(request, response);
+			return;
+		}
 
-		sendEmail(request.getParameter(MyConstants.EMAIL), username);
+		try {
+			sendEmail(request.getParameter(MyConstants.EMAIL), username);
+		} catch (Exception e) {
+			getServletContext().log("Invio email non riuscito", e);
+			request.setAttribute(MyConstants.ERROR, "Invio email non riuscito");
+			request.getRequestDispatcher(request.getRequestURI()).forward(request, response);
+			return;
+		}
 
-		response.sendRedirect(MyConstants.FULL_LOGIN_PATH);
+		response.sendRedirect(MyConstants.LOGIN_FULL_PATH);
 
 	}
 

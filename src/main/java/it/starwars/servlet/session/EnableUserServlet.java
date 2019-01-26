@@ -47,7 +47,7 @@ public class EnableUserServlet extends HttpServlet {
 
 		}
 
-		response.sendRedirect(MyConstants.FULL_LOGIN_PATH);
+		response.sendRedirect(MyConstants.LOGIN_FULL_PATH);
 	}
 
 	/**

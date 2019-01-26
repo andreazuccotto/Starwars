@@ -51,14 +51,13 @@ public class UtenteService {
 		session.getTransaction().commit();
 	}
 
-	public static boolean updateUserPassword(Utente utente) {
+	public static boolean updateUserPassword(String newPassword, String oldPassword) {
 		Session session = HibernateUtils.getSessionFactory().openSession();
 		session.beginTransaction();
 		Query query = session.createNativeQuery(
-				"UPDATE UTENTI SET PASSWORD = crypt(:newpassword, gen_salt('bf')) WHERE ID = :id AND PASSWORD = :oldpassword");
-		query.setParameter("username", utente.getUsername());
-		query.setParameter("password", utente.getPassword());
-		query.setParameter("email", utente.getEmail());
+				"UPDATE UTENTI SET PASSWORD = crypt(:newPassword, gen_salt('bf')) WHERE ID = :id AND PASSWORD = crypt(:oldPassword, password)");
+		query.setParameter("newPassword", newPassword);
+		query.setParameter("oldPassword", oldPassword);
 		int result = query.executeUpdate();
 		session.getTransaction().commit();
 		return result > 0;
