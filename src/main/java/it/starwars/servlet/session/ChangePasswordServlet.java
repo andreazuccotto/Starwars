@@ -14,7 +14,7 @@ import it.starwars.util.MyConstants;
 /**
  * Servlet implementation class EnableUserServlet
  */
-@WebServlet("/login/ChangePasswordServlet")
+@WebServlet("/main/ChangePasswordServlet")
 public class ChangePasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

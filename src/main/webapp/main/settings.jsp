@@ -63,7 +63,7 @@
 
 				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
 					<div class="card-body">
-						<form class="form-inline">
+						<form class="form-inline" action="ChangePasswordServlet">
 							<div class="form-group mb-2">
 								<label for="inputCurPassword">Password corrente</label>
 								<input id="inputCurPassword" name="oldPassword" type="password" class="form-control" required>
