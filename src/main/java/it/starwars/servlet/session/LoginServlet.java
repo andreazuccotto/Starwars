@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 
 		if (utente == null) {
 			request.setAttribute(MyConstants.ERROR, "Username o password non corretta");
-			request.getRequestDispatcher(MyConstants.LOGIN_PATH).forward(request, response);
+			response.sendRedirect(request.getHeader("Referer"));
 			return;
 		}
 
