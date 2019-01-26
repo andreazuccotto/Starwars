@@ -44,19 +44,19 @@ public class LoginServlet extends HttpServlet {
 		} catch (Exception e) {
 			getServletContext().log("Impossibile ricercare l'utente sul db", e);
 			request.setAttribute(MyConstants.ERROR, "Errore del server");
-			request.getRequestDispatcher(request.getRequestURI()).forward(request, response);
+//			request.getRequestDispatcher(MyConstants.LOGIN_PATH).forward(request, response);
 			return;
 		}
 
 		if (utente == null) {
 			request.setAttribute(MyConstants.ERROR, "Username o password non corretta");
-			request.getRequestDispatcher(request.getRequestURI()).forward(request, response);
+//			request.getRequestDispatcher(MyConstants.LOGIN_PATH).forward(request, response);
 			return;
 		}
 
 		if (!utente.getAttivo()) {
 			request.setAttribute(MyConstants.ERROR, "Utente non attivo");
-			request.getRequestDispatcher(request.getRequestURI()).forward(request, response);
+//			request.getRequestDispatcher(MyConstants.LOGIN_PATH).forward(request, response);
 			return;
 		}
 
