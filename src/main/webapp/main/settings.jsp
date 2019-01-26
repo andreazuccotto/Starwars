@@ -66,15 +66,15 @@
 						<form class="form-inline">
 							<div class="form-group mb-2">
 								<label for="inputCurPassword">Password corrente</label>
-								<input id="inputCurPassword" name="oldPassword" type="password" class="form-control-plaintext" required>
+								<input id="inputCurPassword" name="oldPassword" type="password" class="form-control" required>
 							</div>
 							<div class="form-group mb-2">
 								<label for="inputNewPassword">Nuova password</label>
-								<input id="inputNewPassword" name="newPassword" type="password" class="form-control-plaintext" required>
+								<input id="inputNewPassword" name="newPassword" type="password" class="form-control" required>
 							</div>
 							<div class="form-group mb-2">
 								<label for="inputConfirmPassword">Conferma nuova password</label>
-								<input id="inputConfirmPassword" name="confirmPassword" type="password" class="form-control-plaintext" required>
+								<input id="inputConfirmPassword" name="confirmPassword" type="password" class="form-control" required>
 							</div>
 							<button type="submit" class="btn btn-primary mb-2">Modifica</button>
 						</form>
